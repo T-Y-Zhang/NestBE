@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-
+import { User } from './users/user.entity';
 @Module({
   imports: [
     AuthModule,
@@ -15,9 +15,9 @@ import { UsersModule } from './users/users.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'root',
+      password: '12345678',
       database: 'test',
-      entities: [],
+      entities: [User],
       synchronize: true,
     }),
   ],
