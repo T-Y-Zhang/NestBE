@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 
@@ -26,6 +26,10 @@ export class AuthService {
   }
 
   async signup(email: string, name: string, password: string) {
+    const found = await this.usersService.findOneByEmail(email);
+    if (found) {
+      throw new ConflictException();
+    }
     const user = await this.usersService.create(name, email, password);
     const payload = { email: email, sub: user.id };
     return {
