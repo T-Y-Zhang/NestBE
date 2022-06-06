@@ -8,7 +8,9 @@ export class AppController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
-  async signup(@Request() req) {}
+  async signup(@Request() req) {
+    this.authService.signup(req.email, req.name, req.password);
+  }
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
